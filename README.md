@@ -22,13 +22,9 @@ Taip pat zodziai gali prasideti is didziosios tiek is mazosios raides ar buti nu
 ```C++
 string wordFix (string word){
 
-    for (int i=0 ; i<word.size() ; i++)
-        if (!(word[i] >= 'a' && word[i]<='z'))
-            word[i] = tolower(word[i]);
+    std::transform(word.begin(), word.end(), word.begin(), ::tolower);
 
-    for (int i=0 ; i<word.size() ; i++)
-        if (!(word[i] >= 'a' && word[i]<='z'))
-            word = word.substr(0,i) + word.substr(i+1);
+    word.erase(std::remove_if(word.begin(), word.end(), ::ispunct), word.end());
 
     return word;
 }
